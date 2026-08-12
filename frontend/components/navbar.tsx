@@ -1,13 +1,15 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { BrainCircuit, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/", label: "Home" },
+  { href: "/programs", label: "Programs" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -32,8 +34,8 @@ export function Navbar() {
     >
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-neon-cyan/30 bg-white/[0.06] text-neon-cyan shadow-glow">
-            <BrainCircuit className="h-5 w-5" />
+          <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg border border-neon-cyan/30 bg-white/[0.06] shadow-glow">
+            <Image src="/abacify_logo.png" alt="Abacify logo" width={40} height={40} className="h-full w-full object-contain" priority />
           </span>
           <span className="font-heading text-lg font-semibold text-white">Abacify</span>
         </Link>
@@ -45,7 +47,7 @@ export function Navbar() {
             </Button>
           ))}
           <Button asChild size="sm" className="ml-2">
-            <Link href="/apply">Apply Now</Link>
+            <Link href="/enquire">Enquire Now</Link>
           </Button>
         </div>
 
@@ -53,6 +55,7 @@ export function Navbar() {
           className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05] md:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label="Toggle navigation menu"
+          aria-expanded={open}
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -71,8 +74,8 @@ export function Navbar() {
             </Link>
           ))}
           <Button asChild className="mt-2 w-full">
-            <Link href="/apply" onClick={() => setOpen(false)}>
-              Apply Now
+            <Link href="/enquire" onClick={() => setOpen(false)}>
+              Enquire Now
             </Link>
           </Button>
         </div>

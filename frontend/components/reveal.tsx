@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +10,12 @@ type RevealProps = PropsWithChildren<{
 }>;
 
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={cn(className)}>{children}</div>;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}

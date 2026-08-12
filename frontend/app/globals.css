@@ -46,7 +46,10 @@ body {
   inset: -1px;
   z-index: -1;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.75), rgba(34, 211, 238, 0.65), rgba(47, 128, 237, 0.45));
+  background: var(
+    --program-glow-gradient,
+    linear-gradient(135deg, rgba(168, 85, 247, 0.75), rgba(34, 211, 238, 0.65), rgba(47, 128, 237, 0.45))
+  );
   opacity: 0.38;
   filter: blur(12px);
   transition: opacity 180ms ease;
@@ -58,4 +61,15 @@ body {
 
 .text-balance {
   text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

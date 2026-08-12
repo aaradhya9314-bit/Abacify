@@ -3,8 +3,7 @@ import express from "express";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import morgan from "morgan";
-import applicationRoutes from "./routes/applicationRoutes.js";
-import contactRoutes from "./routes/contactRoutes.js";
+import enquiryRoutes from "./routes/enquiryRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 const app = express();
@@ -46,8 +45,7 @@ app.get("/", (_req, res) => {
     routes: {
       health: "/health",
       api: "/api",
-      contact: "/api/contact",
-      apply: "/api/apply",
+      enquiry: "/api/enquiry",
     },
   });
 });
@@ -60,12 +58,11 @@ app.get("/api", (_req, res) => {
   res.status(200).json({
     success: true,
     message: "Abacify API routes",
-    routes: ["/api/contact", "/api/apply"],
+    routes: ["/api/enquiry"],
   });
 });
 
-app.use("/api/contact", contactRoutes);
-app.use("/api/apply", applicationRoutes);
+app.use("/api/enquiry", enquiryRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

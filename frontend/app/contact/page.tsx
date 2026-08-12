@@ -1,41 +1,55 @@
-import { Mail, MessageCircle, Send, Users, Workflow } from "lucide-react";
-import { ContactForm } from "@/components/contact-form";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { getDisplayPhoneNumber, getWhatsAppLink } from "@/lib/whatsapp";
 
-const contacts = [
-  ["WhatsApp", MessageCircle, "Fast counseling and program questions"],
-  ["Email", Mail, "Admissions, support, and partnership queries"],
-  ["LinkedIn", Workflow, "Professional updates and hiring network"],
-  ["Instagram", Send, "Community stories and builder highlights"],
-  ["Discord", Users, "Developer community and cohort discussion"],
-] as const;
+export const metadata: Metadata = {
+  title: "Contact Abacify",
+  description: "Get in touch with Abacify over WhatsApp or send a structured enquiry about our programs.",
+  alternates: { canonical: "/contact" },
+};
 
 export default function ContactPage() {
   return (
     <main className="bg-radial-grid px-5 pb-24 pt-32 lg:px-8">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+      <div className="mx-auto max-w-2xl text-center">
         <Reveal>
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-neon-cyan">Contact</p>
-            <h1 className="mt-4 font-heading text-4xl font-semibold text-white md:text-6xl">Talk to the Abacify team</h1>
-            <p className="mt-5 text-lg leading-8 text-slate-300">We usually respond within 24 hours.</p>
-            <div className="mt-10 grid gap-4">
-              {contacts.map(([label, Icon, copy]) => (
-                <Card key={label} className="flex items-start gap-4 p-5 transition hover:-translate-y-1 hover:border-neon-cyan/35">
-                  <Icon className="mt-1 h-5 w-5 text-neon-cyan" />
-                  <div>
-                    <p className="font-heading text-lg font-semibold text-white">{label}</p>
-                    <p className="mt-1 text-sm text-slate-400">{copy}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-neon-cyan">Contact</p>
+          <h1 className="mt-4 font-heading text-4xl font-semibold text-white md:text-6xl">Talk to Abacify</h1>
+          <p className="mt-5 text-lg leading-8 text-slate-300">
+            The fastest way to reach us is WhatsApp. For a structured request with your child&apos;s details and
+            program preference, send an enquiry instead.
+          </p>
         </Reveal>
+
         <Reveal delay={0.1}>
-          <Card className="glow-border p-6 md:p-8">
-            <ContactForm />
+          <Card className="glow-border mt-12 grid gap-4 p-8 text-left sm:grid-cols-2">
+            <a
+              href={getWhatsAppLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-1 hover:border-neon-cyan/40"
+            >
+              <MessageCircle className="h-6 w-6 shrink-0 text-neon-cyan" />
+              <div>
+                <p className="font-heading text-lg font-semibold text-white">WhatsApp</p>
+                <p className="mt-1 text-sm text-slate-400">{getDisplayPhoneNumber()}</p>
+              </div>
+            </a>
+
+            <Link
+              href="/enquire"
+              className="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-1 hover:border-neon-cyan/40"
+            >
+              <div>
+                <p className="font-heading text-lg font-semibold text-white">Send an Enquiry</p>
+                <p className="mt-1 text-sm text-slate-400">Structured form for program questions</p>
+              </div>
+              <ArrowRight className="h-5 w-5 shrink-0 text-neon-cyan" />
+            </Link>
           </Card>
         </Reveal>
       </div>

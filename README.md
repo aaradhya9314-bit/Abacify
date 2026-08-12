@@ -1,6 +1,6 @@
-# Abacify AI-First Internship Platform
+# Abacify
 
-Production-ready full-stack website for an AI-first internship and builder ecosystem.
+Information + enquiry website for Abacify's learning programs: Abacus, Chess, AI & Robotics, and Maths & Science.
 
 ## Apps
 
